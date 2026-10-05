@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>For Sidney</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600&display=swap">
+<style>
+/* Layout: a love-note card under a floating polaroid of Sidney; her photo, hearts and paws drift up the sky, and her real kitten scampers along the bottom. */
+:root{
+  --bg:#ffdfe9; --bg2:#efe0ff; --card:#fffafc; --fg:#4a2740; --muted:#96647f;
+  --accent:#e8447e; --on-accent:#ffffff; --soft:#ffd0df; --line:#f6bfd2;
+  --paper:#ffffff; --ink:#4a2740; --glow:rgba(232,68,126,.35);
+  --display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --hand:"Caveat","Segoe Script","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#24142b; --bg2:#3a1c3c; --card:#3b2344; --fg:#fdeef4; --muted:#d3a9c0;
+  --accent:#ff8fb3; --on-accent:#3a1228; --soft:#56304f; --line:#6a3d62; --glow:rgba(255,143,179,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#24142b; --bg2:#3a1c3c; --card:#3b2344; --fg:#fdeef4; --muted:#d3a9c0;
+  --accent:#ff8fb3; --on-accent:#3a1228; --soft:#56304f; --line:#6a3d62; --glow:rgba(255,143,179,.3); color-scheme:dark}
+
+html,body{height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  background:var(--bg); background-image:linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed; color:var(--fg); font-family:var(--display); font-size:17px;
+  display:flex; align-items:center; justify-content:center;
+  padding-inline:16px; padding-block:40px 120px; overflow-x:hidden;
+}
+
+/* drifting photos, hearts and paws */
+.sky{position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0}
+.sky > *{position:absolute; top:0; animation:rise linear infinite; will-change:transform}
+.sky svg{opacity:.6}
+.sky img{border-radius:50%; border:3px solid var(--paper); box-shadow:0 6px 16px -6px var(--glow); object-fit:cover}
+@keyframes rise{
+  from{transform:translate3d(0,108vh,0) rotate(-12deg)}
+  50%{transform:translate3d(26px,44vh,0) rotate(10deg)}
+  to{transform:translate3d(0,-24vh,0) rotate(-12deg)}
+}
+
+/* the real kitten, running */
+.runner{position:fixed; left:0; z-index:3; pointer-events:none; animation:run linear infinite}
+.runner.back{animation-name:runback}
+.runner img{
+  display:block; width:var(--s,64px); height:var(--s,64px); border-radius:50%; object-fit:cover;
+  border:3px solid var(--paper); box-shadow:0 8px 14px -6px rgba(60,20,50,.5);
+  animation:hop .34s ease-in-out infinite alternate;
+}
+.runner:not(.back) img{scale:-1 1}
+@keyframes run{from{transform:translateX(-90px)}to{transform:translateX(calc(100vw + 90px))}}
+@keyframes runback{from{transform:translateX(calc(100vw + 90px))}to{transform:translateX(-90px)}}
+@keyframes hop{from{translate:0 0; rotate:-6deg}to{translate:0 -16px; rotate:6deg}}
+
+.card{
+  position:relative; z-index:1; width:100%; max-width:430px; background:var(--card);
+  border:2px solid var(--line); border-radius:32px; padding:26px 24px 26px; text-align:center;
+  box-shadow:0 18px 50px -18px rgba(120,30,80,.45), 0 0 0 8px color-mix(in srgb,var(--card) 45%,transparent);
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+}
+
+/* floating polaroid of Sidney */
+.polaroid{
+  position:relative; width:min(230px,72%); background:var(--paper); padding:10px 10px 8px; border-radius:6px;
+  box-shadow:0 14px 30px -10px rgba(80,20,60,.55); animation:floaty 5s ease-in-out infinite; margin-top:4px;
+}
+.polaroid img{display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:3px}
+.polaroid figcaption{font-family:var(--hand); font-size:1.35rem; color:var(--ink); line-height:1.2; padding-top:4px}
+.polaroid::before{
+  content:""; position:absolute; top:-12px; left:50%; width:86px; height:24px; translate:-50% 0; rotate:-3deg;
+  background:var(--soft); opacity:.85; border-radius:2px;
+}
+figure{margin:0}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
+
+.step{display:flex; flex-direction:column; align-items:center; gap:16px; width:100%; animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:.2; transform:scale(.92)}to{opacity:1; transform:none}}
+.hand{font-family:var(--hand); font-size:1.6rem; color:var(--accent); line-height:1.15; margin:0}
+h1{font-size:clamp(1.7rem,7vw,2.15rem); font-weight:600; line-height:1.15; margin:0; text-wrap:balance}
+p{margin:0}
+.note{color:var(--muted); min-height:1.5em}
+.btns{display:flex; flex-direction:column; gap:12px; width:100%; margin-top:4px}
+button{
+  font:500 1.1rem var(--display); border-radius:999px; padding:14px 20px; cursor:pointer; width:100%;
+  border:2px solid var(--accent); background:var(--accent); color:var(--on-accent);
+  transition:transform .18s ease, box-shadow .18s ease; position:relative;
+  box-shadow:0 6px 0 -1px var(--line);
+}
+button.alt{background:transparent; color:var(--accent)}
+button:hover{transform:translateY(-2px)}
+button:active{transform:translateY(2px); box-shadow:none}
+button:focus-visible{outline:3px solid var(--fg); outline-offset:3px}
+#ready.playing{transition:transform 1.5s ease-in-out; pointer-events:none; z-index:5}
+.link{all:unset; cursor:pointer; color:var(--muted); font-size:.9rem; text-decoration:underline; width:auto}
+.link:focus-visible{outline:2px solid var(--fg); outline-offset:3px}
+
+.place{width:100%; border:2px dashed var(--line); border-radius:20px; background:var(--soft); overflow:hidden}
+.place img{display:block; width:100%; aspect-ratio:3/2; object-fit:cover}
+.ticket{display:grid; grid-template-columns:1fr 1fr}
+.ticket div{padding:12px 10px; min-width:0}
+.ticket div+div{border-left:2px dashed var(--line)}
+.ticket .wide{grid-column:1/-1; border-left:0; border-bottom:2px dashed var(--line)}
+.ticket small{display:block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+.ticket b{font-weight:600; font-size:1.15rem}
+
+.burst{position:fixed; left:50%; top:50%; width:30px; height:30px; pointer-events:none; z-index:6; animation:burst 1.6s ease-out forwards}
+img.burst{width:44px; height:44px; border-radius:50%; border:2px solid var(--paper); object-fit:cover}
+@keyframes burst{
+  from{transform:translate(-50%,-50%) scale(.3); opacity:1}
+  to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.2) rotate(var(--r)); opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .sky > *{animation:none; transform:translateY(var(--y))}
+  .runner{animation:none; left:var(--x)} .runner img{animation:none}
+  .polaroid{animation:none; transform:rotate(-3deg)} .step{animation:none}
+  .burst{display:none}
+  #ready.playing{transition-duration:.4s}
+}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="paw" viewBox="0 0 100 100">
+    <g fill="var(--fur,#ff9db8)">
+      <ellipse cx="50" cy="66" rx="24" ry="19"/>
+      <ellipse cx="20" cy="42" rx="9" ry="12"/><ellipse cx="40" cy="26" rx="9" ry="12"/>
+      <ellipse cx="60" cy="26" rx="9" ry="12"/><ellipse cx="80" cy="42" rx="9" ry="12"/>
+    </g>
+  </symbol>
+  <symbol id="heart" viewBox="0 0 100 100">
+    <path d="M50 86C10 58 8 30 28 22c12-5 20 4 22 10 2-6 10-15 22-10 20 8 18 36-22 64Z" fill="var(--fur,#e8447e)"/>
+  </symbol>
+</svg>
+
+<div class="sky" id="sky" aria-hidden="true"></div>
+<div id="runners" aria-hidden="true"></div>
+
+<main class="card">
+  <figure class="polaroid">
+    <img src="sidney.jpg" alt="Sidney smiling with a kitten on her shoulder">
+    <figcaption>Sidney &amp; her tiny friend</figcaption>
+  </figure>
+
+  <section class="step" id="s1">
+    <p class="hand">a little note for you</p>
+    <h1>Hi Sidney! How are you?</h1>
+    <div class="btns">
+      <button id="good" type="button">I am good</button>
+      <button id="notgood" type="button" class="alt">I am not good</button>
+    </div>
+  </section>
+
+  <section class="step" id="s2" hidden>
+    <p class="hand" id="lead"></p>
+    <h1>Are you ready for tomorrow?</h1>
+    <p class="note" id="note" aria-live="polite"></p>
+    <div class="btns">
+      <button id="ready" type="button">Yes, I am ready</button>
+      <button id="notready" type="button" class="alt">I am not</button>
+    </div>
+  </section>
+
+  <section class="step" id="s3" hidden>
+    <p class="hand">yay! see you tomorrow</p>
+    <h1>We are going to 7 Shooter Coffee Shop</h1>
+    <p>We will have fun there.</p>
+    <div class="place">
+      <img src="coffee-shop.jpg" alt="The front of 7 Shooter Coffee Co.">
+      <div class="ticket">
+        <div class="wide"><small>Where</small><b>7 Shooter Coffee Co.</b></div>
+        <div><small>When</small><b>Tomorrow</b></div>
+        <div><small>Time</small><b>1:00 PM</b></div>
+      </div>
+    </div>
+    <p class="hand">Will see you there at 1 PM</p>
+    <button class="link" id="again" type="button">Play again</button>
+  </section>
+</main>
+
+<script>
+(function(){
+  var HER="sidney-small.jpg", KIT="kitten.jpg";
+  var $=function(id){return document.getElementById(id)};
+  var NS='http://www.w3.org/2000/svg';
+  var pinks=['#ff9db8','#e8447e','#ffb7ce','#c98be0'];
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function pick(a){return a[Math.floor(Math.random()*a.length)]}
+  function icon(kind,size,color){
+    var s=document.createElementNS(NS,'svg'), u=document.createElementNS(NS,'use');
+    s.setAttribute('width',size); s.setAttribute('height',size);
+    s.style.setProperty('--fur',color); u.setAttribute('href','#'+kind);
+    s.appendChild(u); return s;
+  }
+  function photo(src,size){
+    var i=new Image(); i.src=src; i.alt=''; i.width=size; i.height=size; return i;
+  }
+
+  // sky: her photo, hearts and paws drifting up
+  var sky=$('sky');
+  for(var i=0;i<24;i++){
+    var el = i%5===0 ? photo(HER,rnd(56,78)) : icon(i%2?'heart':'paw',rnd(20,36),pick(pinks));
+    var dur=rnd(16,30);
+    el.style.left=(i%5===0 ? [4,80,22,62,90][i/5] : rnd(-2,96))+'%';
+    el.style.animationDuration=dur+'s';
+    el.style.animationDelay=(-rnd(0,dur))+'s';
+    el.style.setProperty('--y',rnd(2,90)+'vh');
+    sky.appendChild(el);
+  }
+
+  // her kitten running here and there
+  var runs=[
+    {bottom:'10px',s:70,dur:9,delay:0},
+    {bottom:'38px',s:52,dur:13,delay:-5,back:1},
+    {bottom:'6px',s:58,dur:11,delay:-7,back:1},
+    {top:'8px',s:48,dur:15,delay:-3},
+    {bottom:'46px',s:44,dur:17,delay:-11}
+  ];
+  runs.forEach(function(r,n){
+    var d=document.createElement('div');
+    d.className='runner'+(r.back?' back':'');
+    if(r.top)d.style.top=r.top; else d.style.bottom=r.bottom;
+    d.style.setProperty('--s',r.s+'px');
+    d.style.setProperty('--x',(8+n*20)+'%');
+    d.style.animationDuration=r.dur+'s';
+    d.style.animationDelay=r.delay+'s';
+    var im=photo(KIT,r.s); im.style.animationDelay=(-n*0.11)+'s';
+    d.appendChild(im); $('runners').appendChild(d);
+  });
+
+  function show(id){
+    ['s1','s2','s3'].forEach(function(s){$(s).hidden=(s!==id)});
+  }
+
+  // step 1
+  $('good').addEventListener('click',function(){
+    $('lead').textContent='Yay, that makes me happy!'; show('s2');
+  });
+  $('notgood').addEventListener('click',function(){
+    $('lead').textContent='Aww. Maybe this will cheer you up.'; show('s2');
+  });
+
+  // step 2: the first try floats away, the second try works
+  var ready=$('ready'), note=$('note'), state='fresh', timers=[];
+  function later(fn,ms){timers.push(setTimeout(fn,ms))}
+  function play(){
+    if(state!=='fresh')return;
+    state='playing';
+    ready.classList.add('playing');
+    var w=Math.min(110,(window.innerWidth-ready.offsetWidth)/2+60);
+    var side=Math.random()<.5?-1:1;
+    note.textContent='';
+    ready.style.transform='translate('+(side*w)+'px,-150px) rotate('+(side*9)+'deg)';
+    later(function(){ready.style.transform='translate('+(-side*w*.7)+'px,-230px) rotate('+(-side*7)+'deg)'},1500);
+    later(function(){
+      ready.style.transform='';
+      note.textContent='Sorry, I was playing! Choose one more time.';
+    },3000);
+    later(function(){ready.classList.remove('playing'); state='ready'},4500);
+  }
+  ready.addEventListener('pointerenter',play);
+  ready.addEventListener('pointerdown',play);
+  ready.addEventListener('click',function(){
+    if(state==='fresh'){play();return}
+    if(state!=='ready')return;
+    show('s3'); celebrate();
+  });
+  $('notready').addEventListener('click',function(){
+    if(state==='playing')return;
+    note.textContent='The kitten says please. Pick the other one!';
+  });
+
+  function celebrate(){
+    for(var i=0;i<34;i++){
+      var el = i%5===0 ? photo(KIT,44) : icon(i%2?'heart':'paw',30,pick(pinks));
+      var a=rnd(0,Math.PI*2), d=rnd(120,380);
+      el.setAttribute('class','burst');
+      el.style.setProperty('--dx',Math.cos(a)*d+'px');
+      el.style.setProperty('--dy',Math.sin(a)*d+'px');
+      el.style.setProperty('--r',rnd(-180,180)+'deg');
+      el.style.animationDelay=rnd(0,.35)+'s';
+      document.body.appendChild(el);
+      (function(n){setTimeout(function(){n.remove()},2300)})(el);
+    }
+  }
+
+  $('again').addEventListener('click',function(){
+    timers.forEach(clearTimeout); timers=[];
+    state='fresh'; ready.classList.remove('playing'); ready.style.transform='';
+    note.textContent=''; show('s1');
+  });
+})();
+</script>
+</body>
+</html>
